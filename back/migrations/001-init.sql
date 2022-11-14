@@ -1,0 +1,37 @@
+-- Up
+CREATE TABLE IF NOT EXISTS "users" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"username"	TEXT NOT NULL UNIQUE,
+	"password"	TEXT NOT NULL,
+	"email"	TEXT NOT NULL UNIQUE,
+	"books"	INTEGER,
+	"admin" INTEGER DEFAULT 0,
+	PRIMARY KEY("id" AUTOINCREMENT),
+	FOREIGN KEY("books") REFERENCES "books"("id")
+);
+CREATE TABLE IF NOT EXISTS "categories" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"name"	TEXT NOT NULL UNIQUE,
+	"recipes" TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "books" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"name"	TEXT NOT NULL,
+	"categories"	TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "recipes" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"title"	INTEGER NOT NULL,
+	"oventemp"	TEXT,
+	"baketime"	TEXT,
+	"ingredients"	TEXT NOT NULL,
+	"steps"	TEXT NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+-- Down
+DROP TABLE IF EXISTS 'users';
+DROP TABLE IF EXISTS 'categories';
+DROP TABLE IF EXISTS 'books';
+DROP TABLE IF EXISTS 'recipes';
